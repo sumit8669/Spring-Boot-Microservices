@@ -1,7 +1,5 @@
-package com.sumit.jobappy.controller;
+package com.sumit.jobappy.job;
 
-import com.sumit.jobappy.model.Job;
-import com.sumit.jobappy.service.JobService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

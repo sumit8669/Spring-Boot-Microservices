@@ -1,11 +1,10 @@
-package com.sumit.jobappy.service;
+package com.sumit.jobappy.job.impl;
 
-import com.sumit.jobappy.model.Job;
-import com.sumit.jobappy.repository.JobRepository;
+import com.sumit.jobappy.job.Job;
+import com.sumit.jobappy.job.JobService;
+import com.sumit.jobappy.job.JobRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 

@@ -1,4 +1,4 @@
-package com.sumit.jobappy.model;
+package com.sumit.jobappy.job;
 
 import jakarta.persistence.*;
 

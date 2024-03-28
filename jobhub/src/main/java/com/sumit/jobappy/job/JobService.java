@@ -1,6 +1,6 @@
-package com.sumit.jobappy.service;
+package com.sumit.jobappy.job;
 
-import com.sumit.jobappy.model.Job;
+import com.sumit.jobappy.job.Job;
 
 import java.util.List;
 
