@@ -1,13 +1,19 @@
 package com.sumit.jobappy.model;
 
-public class Job {
+import jakarta.persistence.*;
 
+@Entity
+public class Job {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
     private String title;
     private String description;
     private String maxSalary;
     private String minSalary;
     private String location;
+
+    public Job(){}
 
     public Job(Long id, String title, String description, String maxSalary, String minSalary, String location) {
         Id = id;

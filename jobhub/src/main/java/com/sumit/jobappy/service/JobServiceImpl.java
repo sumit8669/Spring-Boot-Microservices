@@ -1,62 +1,63 @@
 package com.sumit.jobappy.service;
 
 import com.sumit.jobappy.model.Job;
+import com.sumit.jobappy.repository.JobRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class JobServiceImpl implements JobService {
-    private List<Job> jobs = new ArrayList<>();
-    private Long nextId =1L;
+   // private final List<Job> jobs = new ArrayList<>();
+   //private Long nextId =1L;
+   private JobRepository jobRepository;
+
+    public JobServiceImpl(JobRepository jobRepository){
+        this.jobRepository=jobRepository;
+    }
 
     @Override
     public void createJob(Job job) {
-        job.setId(nextId++);
-        jobs.add(job);
+        jobRepository.save(job);
     }
 
     @Override
     public Job findJobById(Long id) {
-        for (Job job :jobs){
-            if(job.getId().equals(id))
-                return job;
-        }
-        return null;
+       return jobRepository.findById(id).orElse(null);
     }
 
     @Override
     public Boolean deleteJobById(Long id) {
-        Iterator<Job> jobIterator = jobs.iterator();
-        while (jobIterator.hasNext()){
-            Job job = jobIterator.next();
-            if (job.getId().equals(id)){
-                jobIterator.remove();
-                return true;
-            }
-        }
-        return false;
+       try {
+           jobRepository.deleteById(id);
+           return true;
+       }catch (Exception e){
+           return false;
+       }
     }
 
     @Override
     public Boolean updatedJobById(Long id, Job updatedJob) {
-        for (Job job : jobs){
-            if (job.getId().equals(id)){
+        Optional<Job> jobOptional = jobRepository.findById(id);
+            if (jobOptional.isPresent()) {
+                Job job = jobOptional.get();
                 job.setTitle(updatedJob.getTitle());
                 job.setDescription(updatedJob.getDescription());
                 job.setMaxSalary(updatedJob.getMaxSalary());
                 job.setMinSalary(updatedJob.getMinSalary());
+                job.setLocation(updatedJob.getLocation());
+                jobRepository.save(job);
                 return true;
             }
-        }
         return false;
     }
 
     @Override
     public List<Job> findAllJobs() {
-        return jobs;
+        return jobRepository.findAll();
     }
 
 
