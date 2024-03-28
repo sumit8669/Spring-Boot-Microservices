@@ -1,4 +1,3 @@
-# Spring-Boot-Microservices
 # Java Spring Boot Microservices with Kubernetes, Docker, and AWS
 
 ## Overview
