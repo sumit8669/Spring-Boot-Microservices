@@ -1,0 +1,6 @@
+#spring.application.name=jobhub
+server:
+  port: 9696
+spring:
+  application:
+    name: jobhub
