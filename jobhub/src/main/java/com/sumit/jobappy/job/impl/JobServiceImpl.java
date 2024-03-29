@@ -50,7 +50,7 @@ public class JobServiceImpl implements JobService {
                 job.setLocation(updatedJob.getLocation());
                 jobRepository.save(job);
                 return true;
-            }
+            } else
         return false;
     }
 
