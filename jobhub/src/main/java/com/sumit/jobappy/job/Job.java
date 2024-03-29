@@ -1,5 +1,6 @@
 package com.sumit.jobappy.job;
 
+import com.sumit.jobappy.company.Company;
 import jakarta.persistence.*;
 
 @Entity
@@ -12,6 +13,16 @@ public class Job {
     private String maxSalary;
     private String minSalary;
     private String location;
+    @ManyToOne
+    private Company company;
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
 
     public Job(){}
 
