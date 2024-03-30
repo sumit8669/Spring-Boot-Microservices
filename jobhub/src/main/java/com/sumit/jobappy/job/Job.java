@@ -1,7 +1,10 @@
 package com.sumit.jobappy.job;
 
 import com.sumit.jobappy.company.Company;
+import com.sumit.jobappy.reviews.Review;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Job {
@@ -13,8 +16,11 @@ public class Job {
     private String maxSalary;
     private String minSalary;
     private String location;
+
     @ManyToOne
     private Company company;
+
+
 
     public Company getCompany() {
         return company;

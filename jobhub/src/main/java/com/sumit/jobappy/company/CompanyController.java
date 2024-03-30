@@ -39,17 +39,20 @@ public class CompanyController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletedByCompanyId(@PathVariable Long id){
         Boolean deleted =  companyService.deleteByCompanyId(id);
-        if (deleted)
-            return new ResponseEntity<>("Company is deleted successfully",HttpStatus.OK);
-        return new ResponseEntity<>("Company not Found",HttpStatus.NOT_FOUND);
+        if (deleted) {
+            return new ResponseEntity<>("Company is deleted successfully", HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>("Company not Found", HttpStatus.NOT_FOUND);
+        }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updatedByCompanyId(@PathVariable Long id, @RequestBody Company company){
-            Boolean updated = companyService.updateByCompanyId(id,company);
-                if (updated)
-                return new ResponseEntity<>("Company updated Successfully",HttpStatus.OK);
-        return new ResponseEntity<>("Error occurred!!!",HttpStatus.BAD_REQUEST);
+    public ResponseEntity<String> updatedByCompanyId(@PathVariable Long id, @RequestBody Company company) {
+        Boolean updated = companyService.updateByCompanyId(id, company);
+        if (updated) {
+            return new ResponseEntity<>("Company updated Successfully", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Error occurred!!!", HttpStatus.BAD_REQUEST);
+        }
     }
-
 }

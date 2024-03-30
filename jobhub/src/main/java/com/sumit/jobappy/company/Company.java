@@ -2,6 +2,7 @@ package com.sumit.jobappy.company;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sumit.jobappy.job.Job;
+import com.sumit.jobappy.reviews.Review;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -17,7 +18,16 @@ public class Company {
     @OneToMany(mappedBy = "company")
     private List<Job> jobs;
 
-    //private List<Review> reviews;
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    @OneToMany(mappedBy = "company")
+    private List<Review> reviews;
 
     public Company() {
     }

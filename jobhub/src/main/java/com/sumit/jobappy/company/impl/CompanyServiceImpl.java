@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 public class CompanyServiceImpl implements CompanyService {
 
-    private CompanyRepository companyRepository;
+   private final CompanyRepository companyRepository;
 
     public CompanyServiceImpl(CompanyRepository companyRepository) {
         this.companyRepository = companyRepository;
@@ -35,10 +35,10 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Boolean deleteByCompanyId(Long id) {
-        try {
-            companyRepository.deleteById(id);
-            return true;
-        }catch (Exception e) {
+        if (companyRepository.existsById(id)){
+             companyRepository.deleteById(id);
+             return true;
+            } else {
             return false;
         }
     }

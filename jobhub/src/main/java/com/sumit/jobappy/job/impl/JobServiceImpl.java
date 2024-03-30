@@ -12,10 +12,15 @@ import java.util.Optional;
 public class JobServiceImpl implements JobService {
    // private final List<Job> jobs = new ArrayList<>();
    //private Long nextId =1L;
-   private JobRepository jobRepository;
+   private final JobRepository jobRepository;
 
     public JobServiceImpl(JobRepository jobRepository){
         this.jobRepository=jobRepository;
+    }
+
+    @Override
+    public List<Job> findAllJobs() {
+        return jobRepository.findAll();
     }
 
     @Override
@@ -30,34 +35,30 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public Boolean deleteJobById(Long id) {
-       try {
-           jobRepository.deleteById(id);
-           return true;
-       }catch (Exception e){
-           return false;
+        if (jobRepository.existsById(id)){
+            jobRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
        }
-    }
 
     @Override
     public Boolean updatedJobById(Long id, Job updatedJob) {
         Optional<Job> jobOptional = jobRepository.findById(id);
-            if (jobOptional.isPresent()) {
-                Job job = jobOptional.get();
-                job.setTitle(updatedJob.getTitle());
-                job.setDescription(updatedJob.getDescription());
-                job.setMaxSalary(updatedJob.getMaxSalary());
-                job.setMinSalary(updatedJob.getMinSalary());
-                job.setLocation(updatedJob.getLocation());
-                jobRepository.save(job);
-                return true;
-            } else
-        return false;
+        if (jobOptional.isPresent()) {
+            Job job = jobOptional.get();
+            job.setTitle(updatedJob.getTitle());
+            job.setDescription(updatedJob.getDescription());
+            job.setMaxSalary(updatedJob.getMaxSalary());
+            job.setMinSalary(updatedJob.getMinSalary());
+            job.setLocation(updatedJob.getLocation());
+            jobRepository.save(job);
+            return true;
+        } else
+            return false;
     }
-
-    @Override
-    public List<Job> findAllJobs() {
-        return jobRepository.findAll();
-    }
-
-
 }
+
+
+
