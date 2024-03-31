@@ -20,11 +20,13 @@ management:
       exposure:
         include: '*'
   endpoint:
-    health:
+    shutdown:
+      enabled: true
       show-details: always
   info:
     env:
       enabled: true
+
 
 info:
   app:
