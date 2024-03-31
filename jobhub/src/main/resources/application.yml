@@ -20,16 +20,16 @@ management:
       exposure:
         include: '*'
   endpoint:
-    shutdown:
-      enabled: true
+    health:
       show-details: always
+    shutdown:
+      enabled:
   info:
     env:
       enabled: true
 
-
 info:
   app:
-    name: 'Job Application'
-    description: 'Job app build by sumit rana'
-    version: 1.0.0
+  name: 'Job Application'
+  description: 'Job app build by sumit rana'
+  version: 1.0.0
