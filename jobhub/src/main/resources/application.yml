@@ -5,8 +5,8 @@ server:
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/jobhub
-    username: sumit
-    password: sumit2628
+    username: sumit8669
+    password: Bitudb2628
   jpa:
     database: POSTGRESQL
     hibernate:
