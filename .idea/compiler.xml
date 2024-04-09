@@ -6,17 +6,21 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="jobhub" />
         <module name="companyms" />
         <module name="jobms" />
+        <module name="jobhub" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="reviewms" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="companyms" options="-parameters" />
       <module name="jobhub" options="-parameters" />
       <module name="jobms" options="-parameters" />
+      <module name="reviewms" options="-parameters" />
     </option>
   </component>
 </project>
