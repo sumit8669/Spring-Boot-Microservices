@@ -2,10 +2,12 @@ package com.sumit.ms.job;
 
 
 
+import com.sumit.ms.job.dto.JobWithCompanyDTO;
+
 import java.util.List;
 
 public interface JobService {
-    List<Job> findAllJobs();
+    List<JobWithCompanyDTO> findAllJobs();
 
     void createJob(Job job);
 

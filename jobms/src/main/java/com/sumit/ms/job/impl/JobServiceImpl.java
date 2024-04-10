@@ -4,10 +4,12 @@ package com.sumit.ms.job.impl;
 import com.sumit.ms.job.Job;
 import com.sumit.ms.job.JobRepository;
 import com.sumit.ms.job.JobService;
+import com.sumit.ms.job.dto.JobWithCompanyDTO;
 import com.sumit.ms.job.external.Company;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,12 +24,23 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public List<Job> findAllJobs() {
+    public List<JobWithCompanyDTO> findAllJobs() {
+        List<Job> jobList = jobRepository.findAll();
+        List<JobWithCompanyDTO> jobWithCompanyDTOs = new ArrayList<>();
+
         RestTemplate restTemplate = new RestTemplate();
-    Company company = restTemplate.getForObject("http://localhost:9091/company/1", Company.class);
-        System.out.println("Company: "+ company.getId());
-        System.out.println("Company: "+ company.getName());
-    return jobRepository.findAll();
+
+        for(Job job: jobList){
+         JobWithCompanyDTO jobWithCompanyDTO  = new JobWithCompanyDTO();
+         jobWithCompanyDTO.setJob(job);
+            Company company = restTemplate.getForObject(
+                    "http://localhost:9091/company/" + job.getCompanyId(),
+                     Company.class);
+            jobWithCompanyDTO.setCompany(company);
+            jobWithCompanyDTOs.add(jobWithCompanyDTO);
+        }
+
+    return jobWithCompanyDTOs;
     }
 
     @Override
