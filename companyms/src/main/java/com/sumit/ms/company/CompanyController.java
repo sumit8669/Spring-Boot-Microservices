@@ -22,7 +22,7 @@ public class CompanyController {
         return new ResponseEntity<>("Company is created Successfully",HttpStatus.CREATED);
     }
 
-    @GetMapping("/all-companies")
+    @GetMapping
     public ResponseEntity<List<Company>> getAllCompanies(){
            List<Company> allCompanies = companyService.getAllCompanies();
         return new ResponseEntity(allCompanies ,HttpStatus.OK);
