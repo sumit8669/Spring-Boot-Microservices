@@ -22,9 +22,9 @@ public class JobController {
     }
 
 
-    @GetMapping("/all-jobs")
-    public ResponseEntity<List<JobWithCompanyDTO>> findAllJobs(){
-        return ResponseEntity.ok(service.findAllJobs());
+    @GetMapping
+    public ResponseEntity<List<JobWithCompanyDTO>> findJobs(){
+        return new ResponseEntity<>(service.findAllJobs(),HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
