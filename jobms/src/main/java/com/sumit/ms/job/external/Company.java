@@ -1,6 +1,5 @@
 package com.sumit.ms.job.external;
 
-;
 
 public class Company {
 
