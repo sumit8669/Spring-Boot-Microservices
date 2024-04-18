@@ -23,4 +23,7 @@ public class JobWithCompanyDTO {
     public void setCompany(Company company) {
         this.company = company;
     }
+
+    public void setId(Long id) {
+    }
 }

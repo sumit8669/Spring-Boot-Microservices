@@ -29,7 +29,6 @@ public class JobServiceImpl implements JobService {
     @Override
     public List<JobWithCompanyDTO> findAllJobs() {
         List<Job> jobList = jobRepository.findAll();
-        List<JobWithCompanyDTO> jobWithCompanyDTOs = new ArrayList<>();
 
 
         return jobList.stream().map(this::convertToDto)
