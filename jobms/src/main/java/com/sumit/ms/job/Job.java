@@ -3,7 +3,7 @@ package com.sumit.ms.job;
 
 import jakarta.persistence.*;
 
-import java.util.List;
+
 
 @Entity
 public class Job {
