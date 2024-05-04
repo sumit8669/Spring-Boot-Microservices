@@ -1,6 +1,6 @@
 package com.sumit.ms.job;
 
-import com.sumit.ms.job.dto.JobWithCompanyDTO;
+import com.sumit.ms.job.dto.JobDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,15 +23,15 @@ public class JobController {
 
 
     @GetMapping
-    public ResponseEntity<List<JobWithCompanyDTO>> findJobs(){
+    public ResponseEntity<List<JobDTO>> findJobs(){
         return ResponseEntity.ok(jobService.findAllJobs());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Job> findJobById(@PathVariable Long id){
-             Job job = jobService.findJobById(id);
-             if(job != null)
-            return new ResponseEntity<>(job,HttpStatus.OK);
+    public ResponseEntity<JobDTO> findJobById(@PathVariable Long id){
+        JobDTO jobDTO = jobService.findJobById(id);
+             if(jobDTO != null)
+            return new ResponseEntity<>(jobDTO,HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
