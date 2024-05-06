@@ -4,18 +4,15 @@ package com.sumit.ms.job.impl;
 import com.sumit.ms.job.Job;
 import com.sumit.ms.job.JobRepository;
 import com.sumit.ms.job.JobService;
+
 import com.sumit.ms.job.clients.CompanyClient;
 import com.sumit.ms.job.clients.ReviewClient;
 import com.sumit.ms.job.dto.JobDTO;
 import com.sumit.ms.job.external.Company;
 import com.sumit.ms.job.external.Review;
 import com.sumit.ms.job.mapper.JobMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+
 
 
 
@@ -33,15 +30,15 @@ public class JobServiceImpl implements JobService {
    private final CompanyClient companyClient;
    private final ReviewClient reviewClient;
 
-   @Autowired
-   RestTemplate restTemplate;
+
 
     public JobServiceImpl(JobRepository jobRepository,
                           CompanyClient companyClient,
                           ReviewClient reviewClient){
         this.jobRepository=jobRepository;
         this.companyClient=companyClient;
-        this.reviewClient=reviewClient;
+        this.reviewClient= reviewClient;
+
     }
 
     @Override
@@ -56,17 +53,8 @@ public class JobServiceImpl implements JobService {
     private JobDTO convertToDto(Job job){
 
 
-        Company company = restTemplate.getForObject(
-                "http://COMPANY-SERVICE:9091/company/" + job.getCompanyId(),
-                Company.class);
-        ResponseEntity<List<Review>> reviewResponse=restTemplate.exchange
-                ("http://REVIEW-SERVICE:9093/reviews?companyId=" + job.getCompanyId(),
-                        HttpMethod.GET,
-                        null,
-                        new ParameterizedTypeReference<List<Review>>() {
-                        });
-
-        List<Review> reviews = reviewResponse.getBody();
+        Company company = companyClient.getCompany(job.getCompanyId());
+        List<Review> reviews = reviewClient.getReviews(job.getCompanyId());
 
             JobDTO jobDTO = JobMapper
                         .mapToJobWithCompanyDto(job,company,reviews);
