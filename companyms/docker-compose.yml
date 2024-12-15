@@ -28,6 +28,13 @@ services:
     networks:
       - postgres_network
     restart: unless-stopped
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - 9411:9411
+    networks:
+      - postgres_network
 
 networks:
   postgres_network:
